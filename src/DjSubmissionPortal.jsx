@@ -1037,7 +1037,7 @@ const handlePhoneChange = (e) => {
                   <button
                     type="submit"
                     disabled={isSending}
-                    style={styles.btnSubmit}
+                    className="dj-btn-submit"
                   >
                     {isSending ? 'Transmission en cours...' : 'Envoyer ma Soumission & Logistique ✓'}
                   </button>
