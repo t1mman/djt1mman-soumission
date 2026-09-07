@@ -1,119 +1,455 @@
+/* ==========================================================================
+   VARIABLES & PALETTE DE COULEURS DJ T1MMAN
+   ========================================================================== */
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+  --dj-yellow: #FFE600;
+  --dj-yellow-glow: rgba(255, 230, 0, 0.4);
+  --dj-yellow-subtle: rgba(255, 230, 0, 0.12);
+  --dj-yellow-hover: rgba(255, 230, 0, 0.22);
+  
+  --bg-dark: #0a0d14;
+  --card-bg: rgba(15, 20, 31, 0.88);
+  --input-bg: rgba(0, 0, 0, 0.45);
+  --dropdown-bg: #0c121e;
+  
+  --border-light: rgba(255, 255, 255, 0.12);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  
+  --text-primary: #ffffff;
+  --text-heading: #f8fafc;
+  --text-sub: #cbd5e1;
+  --text-muted: #94a3b8;
+  
+  --success: #10b981;
+  --success-glow: rgba(16, 185, 129, 0.3);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
-}
-
+/* ==========================================================================
+   RESET & STRUCTURE GLOBALE
+   ========================================================================== */
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  background-color: #0a0e17;
-  color: #fff;
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
 }
 
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
+/* ==========================================================================
+   CONTENEUR ET CARTE GLASSMORPHISM
+   ========================================================================== */
+.dj-portal-container {
+  min-height: 100vh;
+  background-color: var(--bg-dark);
+  background-image: radial-gradient(circle at 50% 0%, rgba(255, 230, 0, 0.09) 0%, transparent 70%);
+  display: flex;
+  justify-content: center;
+  padding: 40px 16px;
+}
+
+.dj-card {
+  width: 100%;
+  maxWidth: 840px;
+  background-color: var(--card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 36px;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.85);
+}
+
+/* ==========================================================================
+   EN-TÊTE & LOGO
+   ========================================================================== */
+.dj-header {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  margin-bottom: 26px;
+  text-align: center;
+}
+
+.dj-logo-wrapper {
+  width: 115px;
+  height: 115px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--dj-yellow);
+  box-shadow: 0 0 25px var(--dj-yellow-glow);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000000;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dj-logo-wrapper:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 35px rgba(255, 230, 0, 0.6);
+}
+
+.dj-logo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dj-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background-color: var(--dj-yellow-subtle);
+  color: var(--dj-yellow);
+  border: 1px solid rgba(255, 230, 0, 0.35);
+  text-transform: uppercase;
+}
+
+.dj-brand-title {
+  color: var(--text-primary);
+  font-size: 2.1rem;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin: 8px 0 0 0;
+  text-shadow: 0 0 16px rgba(255, 230, 0, 0.35);
+}
+
+/* ==========================================================================
+   NAVIGATION ONGLETS (TABS)
+   ========================================================================== */
+.dj-nav-bar {
+  display: flex;
+  gap: 12px;
+  border-bottom: 1px solid var(--border-light);
+  margin-bottom: 28px;
+}
+
+.dj-nav-tab {
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  padding: 12px 18px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.dj-nav-tab:hover {
+  color: #fff;
+}
+
+.dj-nav-tab.active {
+  color: var(--dj-yellow);
+  border-bottom-color: var(--dj-yellow);
+}
+
+/* ==========================================================================
+   TYPOGRAPHIE & TITRES DE SECTIONS
+   ========================================================================== */
+.dj-page-title {
+  color: var(--text-heading);
+  font-size: 1.65rem;
+  font-weight: 800;
+  margin: 0 0 6px 0;
+}
+
+.dj-page-subtitle {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  margin: 0 0 24px 0;
+  line-height: 1.5;
+}
+
+.dj-section {
+  margin-bottom: 26px;
+}
+
+.dj-section-heading {
+  color: #e2e8f0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0 0 14px 0;
+  border-left: 3px solid var(--dj-yellow);
+  padding-left: 10px;
+}
+
+/* ==========================================================================
+   GRILLES DE FORMULAIRE (RESPONSIVE)
+   ========================================================================== */
+.dj-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.dj-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+/* ==========================================================================
+   CHAMPS DE SAISIE (INPUT, SELECT, TEXTAREA)
+   ========================================================================== */
+.dj-label {
+  display: block;
+  color: var(--text-sub);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.dj-input,
+.dj-select,
+.dj-textarea {
+  width: 100%;
   box-sizing: border-box;
+  padding: 11px 14px;
+  border-radius: 8px;
+  background-color: var(--input-bg);
+  border: 1px solid var(--border-light);
+  color: #ffffff;
+  font-size: 0.92rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
+.dj-select {
+  background-color: var(--dropdown-bg);
+}
+
+.dj-textarea {
+  resize: vertical;
+}
+
+.dj-input:focus,
+.dj-select:focus,
+.dj-textarea:focus {
+  border-color: var(--dj-yellow);
+  box-shadow: 0 0 8px rgba(255, 230, 0, 0.3);
+}
+
+/* ==========================================================================
+   CHECKBOXES & RADIO
+   ========================================================================== */
+.dj-checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dj-checkbox-group-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.dj-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-sub);
+  font-size: 0.9rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.dj-checkbox {
+  accent-color: var(--dj-yellow);
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.dj-sub-option-box {
+  margin-top: 10px;
+  padding: 10px 14px;
+  background-color: rgba(255, 255, 255, 0.03);
+  border-radius: 6px;
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+}
+
+/* ==========================================================================
+   BOUTONS DE SÉLECTION DE STYLES MUSICAUX (TAGS)
+   ========================================================================== */
+.dj-tag-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.dj-tag-btn {
+  padding: 7px 13px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background-color: rgba(255, 255, 255, 0.04);
+  color: var(--text-sub);
+  font-size: 0.85rem;
   font-weight: 500;
-  color: var(--text-h);
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
+.dj-tag-btn:hover {
+  border-color: rgba(255, 230, 0, 0.4);
+  background-color: rgba(255, 230, 0, 0.08);
+}
+
+.dj-tag-btn.selected {
+  border-color: var(--dj-yellow);
+  background-color: var(--dj-yellow-subtle);
+  color: var(--dj-yellow);
+}
+
+/* ==========================================================================
+   CARTE DÉDIÉE À LA CÉRÉMONIE
+   ========================================================================== */
+.dj-ceremonie-card {
+  background-color: rgba(255, 230, 0, 0.03);
+  border: 1px solid rgba(255, 230, 0, 0.25);
+  border-radius: 12px;
+  padding: 22px;
+  margin-bottom: 26px;
+}
+
+.dj-badge-ceremonie {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 3px 9px;
+  border-radius: 12px;
+  background-color: var(--dj-yellow);
+  color: #000000;
+  margin-bottom: 12px;
+}
+
+/* ==========================================================================
+   BOUTONS D'ACTION
+   ========================================================================== */
+.dj-btn-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 28px;
+  gap: 12px;
+}
+
+.dj-btn-row-right {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 28px;
+}
+
+.dj-btn-primary {
+  background-color: var(--dj-yellow);
+  color: #000000;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-weight: 800;
+  cursor: pointer;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 15px rgba(255, 230, 0, 0.25);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.dj-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 230, 0, 0.4);
+}
+
+.dj-btn-secondary {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: var(--text-sub);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease;
+}
+
+.dj-btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.14);
+  color: #fff;
+}
+
+.dj-btn-submit {
+  background-color: var(--dj-yellow) !important;
+  color: #000000 !important;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 28px;
+  font-weight: 800;
+  cursor: pointer;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 18px var(--dj-yellow-glow);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.dj-btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(255, 230, 0, 0.55);
+}
+
+/* ==========================================================================
+   ÉCRAN DE CONFIRMATION / SUCCÈS
+   ========================================================================== */
+.dj-success-box {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.dj-check-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: rgba(16, 185, 129, 0.15);
+  border: 2px solid var(--success);
+  color: var(--success);
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px auto;
+}
+
+/* ==========================================================================
+   RESPONSIVE MOBILE (< 600px)
+   ========================================================================== */
+@media (max-width: 600px) {
+  .dj-card {
+    padding: 24px 16px;
   }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
+
+  .dj-brand-title {
+    font-size: 1.7rem;
   }
-}
-p {
-  margin: 0;
-}
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
-}
+  .dj-btn-row {
+    flex-direction: column-reverse;
+  }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+  .dj-btn-primary,
+  .dj-btn-secondary,
+  .dj-btn-submit {
+    width: 100%;
+    text-align: center;
+  }
 }
